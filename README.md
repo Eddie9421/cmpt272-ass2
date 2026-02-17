@@ -1,2 +1,3 @@
 # cmpt272-ass2
-Assignment 2: Interactive Catalog Viewer (JavaScript + CSV)
+
+Site icon from https://www.svgrepo.com/svg/340213/document-view
