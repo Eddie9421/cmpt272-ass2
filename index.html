@@ -21,13 +21,39 @@
     <title>Catalog Viewer</title>
   </head>
   <body>
-    <header
-      class="bg-white border-bottom d-flex flex-column gap-2 py-4 text-center"
-    >
-      <h1 class="display-1">Catalog Viewer</h1>
-      <p class="lead fs-3">Parse CSV files</p>
+    <header class="bg-white border-bottom py-4">
+      <div class="d-flex justify-content-center align-items-center gap-3">
+        <h1 class="display-1">Catalog Viewer</h1>
+        <img
+          src="./assets/site-icon.svg"
+          class="img-fluid"
+          alt="Document with eye on top"
+        />
+      </div>
+      <p class="lead fs-3 text-center">Parse CSV files</p>
     </header>
-    <main></main>
+    <main>
+      <form>
+        <label for="upload-csv">Upload CSV</label>
+        <input type="file" id="csv-upload" accept=".csv" name="csv-upload" />
+        <label for="type">Type</label>
+        <select name="item-type" id="type">
+          <option value="all">All</option>
+          <option value="book">Book</option>
+          <option value="movie">Movie</option>
+          <option value="game">Game</option>
+          <option value="paper">Paper</option>
+        </select>
+        <label for="sort">Sort</label>
+        <select name="sort-option" id="sort">
+          <option value="none">None</option>
+          <option value="year-ascending">Sort by year (ascending)</option>
+          <option value="year-descending">Sort by year (descending)</option>
+          <option value="rating-ascending">Sort by rating (ascending)</option>
+          <option value="rating-descending">Sort by rating (descending)</option>
+        </select>
+      </form>
+    </main>
     <footer></footer>
   </body>
 </html>
