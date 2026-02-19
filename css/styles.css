@@ -1,3 +1,11 @@
 header > .d-flex img {
   width: 5em;
 }
+
+main {
+  background: linear-gradient(
+    to bottom right,
+    rgb(0, 195, 255),
+    rgb(255 0 225 / 25%)
+  );
+}
