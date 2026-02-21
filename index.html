@@ -16,13 +16,15 @@
       defer
     ></script>
     <link rel="stylesheet" href="./css/styles.css" />
-    <script type="text/javascript" src="./js/main.js" defer></script>
+    <script type="text/javascript" src="./js/script.js" defer></script>
     <link rel="icon" href="./assets/multimedia.png" />
     <title>Catalog Viewer</title>
   </head>
   <body class="bg-dark text-light">
     <header class="py-2">
-      <div class="align-items-center d-flex gap-4 justify-content-center mb-3">
+      <div
+        class="align-items-center d-flex gap-4 justify-content-center mb-3 pt-2"
+      >
         <img
           src="./assets/multimedia.png"
           class="img-fluid"
@@ -32,8 +34,8 @@
       </div>
       <p class="lead fs-3 text-center">Parse CSV files</p>
     </header>
-    <main class="container-fluid p-4 text-dark">
-      <form class="card mb-3 shadow-lg">
+    <main class="container-fluid px-4 py-5 text-dark">
+      <form class="card mb-3 shadow-lg text-light">
         <div class="card-body">
           <div class="container-fluid">
             <h2 class="card-title mb-3">Catalog Controls</h2>
@@ -77,22 +79,26 @@
                 </select>
               </div>
             </div>
-            <p class="card-text d-flex justify-content-end">
+            <p class="card-text d-flex fs-5 justify-content-end">
               Upload a CSV to begin.
             </p>
           </div>
         </div>
       </form>
       <section>
-        <div class="align-items-center d-flex justify-content-between">
-          <h2 class="display-4">Your Catalog</h2>
+        <div class="align-items-center d-flex justify-content-between mb-4">
+          <h2>Your Catalog</h2>
           <p class="mb-0"><strong>0 items</strong></p>
+        </div>
+        <div class="py-5 text-center">
+          <h3>No matching items</h3>
+          <p>Try adjusting your filter, or sort.</p>
         </div>
       </section>
     </main>
-    <footer class="d-flex justify-content-between p-4">
-      <p>CMPT 272</p>
-      <p>Assignment 2</p>
+    <footer class="align-items-center d-flex justify-content-between p-4">
+      <p class="fs-2">CMPT 272</p>
+      <p class="fs-2">Assignment 2</p>
     </footer>
   </body>
 </html>

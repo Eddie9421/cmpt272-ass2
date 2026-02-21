@@ -5,8 +5,8 @@ header > .d-flex img {
 main {
   background: linear-gradient(
     to bottom right,
-    rgb(129 225 255),
-    rgb(255 180 246)
+    rgb(170 235 255),
+    rgb(255 210 250)
   );
 }
 
@@ -14,11 +14,13 @@ main > form label.form-label {
   font-weight: 600;
 }
 
-main > h2.display-4 {
-  text-shadow: 0em 0em 1em black;
-}
-
 footer > p {
   font-weight: 600;
-  text-shadow: 0em 0em 1em black;
+  margin-bottom: 0;
+}
+
+main > .card {
+  background-image: url(../assets/cherry-blossoms.jpg);
+  background-size: cover;
+  text-shadow: 0.1em 0.1em 0.3em black;
 }
