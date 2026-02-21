@@ -5,7 +5,20 @@ header > .d-flex img {
 main {
   background: linear-gradient(
     to bottom right,
-    rgb(0, 195, 255),
-    rgb(255 0 225 / 25%)
+    rgb(129 225 255),
+    rgb(255 180 246)
   );
+}
+
+main > form label.form-label {
+  font-weight: 600;
+}
+
+main > h2.display-4 {
+  text-shadow: 0em 0em 1em black;
+}
+
+footer > p {
+  font-weight: 600;
+  text-shadow: 0em 0em 1em black;
 }
