@@ -2,6 +2,16 @@ const hasOption = (selectId, option) =>
   document.querySelector(`#${selectId} option[value="${option}"]`);
 
 const addFilterOptions = () => {
+  const allOption = document.createElement("option");
+  allOption.text = "All";
+  allOption.value = "all";
+
+  typeSelect.innerHTML = "";
+  genreSelect.innerHTML = "";
+  typeSelect.options.add(allOption);
+
+  genreSelect.options.add(allOption.cloneNode(true));
+
   for (const item of catalogItems) {
     const itemType = item.type;
     const itemGenre = item.genre;
@@ -24,7 +34,6 @@ const addFilterOptions = () => {
   }
 };
 
-// classList of no items found message = py-5 text-center
 const updateCatalogUi = () => {
   const validItems = [];
   for (const item of catalogItems) {
@@ -34,8 +43,8 @@ const updateCatalogUi = () => {
   }
 
   catalogContainer.innerHTML = "";
-  catalogContainer.classList = "container";
 
+  catalogContainer.classList = "container";
   if (validItems.length === 0) {
     catalogContainer.classList = "py-5 text-center";
     const heading = document.createElement("h3");
@@ -60,7 +69,7 @@ const updateCatalogUi = () => {
   }
 
   const itemCountText = document.getElementById("catalog-items-count");
-  itemCountText.textContent = `${catalogItems.length} items`;
+  itemCountText.textContent = `${validItems.length} item(s)`;
 };
 
 const onFileChange = (event) => {
@@ -69,33 +78,66 @@ const onFileChange = (event) => {
   if (file) {
     const reader = new FileReader();
     reader.addEventListener("load", (event) => {
-      let lines = event.target.result.split("\n");
-      lines.shift();
-      lines = lines.map((line) => line.split(","));
+      try {
+        let lines = event.target.result.split("\n");
+        lines.shift();
+        lines = lines.map((line) => line.split(","));
 
-      catalogItems = lines.map((line) => {
-        const year = parseInt(line[3]);
-        const rating = parseFloat(line[5]);
+        let index = 0;
+        catalogItems = lines.map((line) => {
+          const year = parseInt(line[3]);
+          const rating = parseFloat(line[5]);
 
-        return new CatalogItem(
-          line[0].trim(),
-          line[1].trim(),
-          line[2].trim(),
-          year,
-          line[4].trim(),
-          rating,
-          line[6].trim(),
-        );
-      });
+          return new CatalogItem(
+            line[0].trim(),
+            line[1].trim(),
+            line[2].trim(),
+            year,
+            line[4].trim(),
+            rating,
+            line[6].trim(),
+            index++,
+          );
+        });
 
-      addFilterOptions();
-      updateCatalogUi();
+        addFilterOptions();
+        updateCatalogUi();
+
+        statusMessage.textContent = `Loaded ${catalogItems.length} item(s).`;
+      } catch (error) {
+        console.error(error);
+      }
     });
 
     reader.readAsText(file);
   } else {
-    console.log("No file found.");
+    statusMessage.textContent = "No file found.";
   }
 };
 
-const onSortChange = (event) => {};
+const onSortChange = (event) => {
+  const sortOption = event.target.value;
+
+  switch (sortOption) {
+    case "none":
+      catalogItems.sort((a, b) => a.index - b.index);
+      break;
+    case "year-ascending":
+      catalogItems.sort((a, b) => a.year - b.year);
+      break;
+    case "year-descending":
+      catalogItems.sort((a, b) => b.year - a.year);
+      break;
+    case "rating-ascending":
+      catalogItems.sort((a, b) => a.rating - b.rating);
+      break;
+    case "rating-descending":
+      catalogItems.sort((a, b) => b.rating - a.rating);
+      break;
+    default:
+      console.error("Reached default case.");
+      break;
+  }
+
+  updateCatalogUi();
+};
