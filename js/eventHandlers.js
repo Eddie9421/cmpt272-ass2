@@ -3,8 +3,8 @@ const hasOption = (selectId, option) =>
 
 const addFilterOptions = () => {
   for (const item of catalogItems) {
-    const itemType = item.type.trim();
-    const itemGenre = item.genre.trim();
+    const itemType = item.type;
+    const itemGenre = item.genre;
 
     if (!hasOption(typeSelect.id, itemType)) {
       const typeOption = document.createElement("option");
@@ -26,14 +26,32 @@ const addFilterOptions = () => {
 
 // classList of no items found message = py-5 text-center
 const updateCatalogUi = () => {
+  const validItems = [];
+  for (const item of catalogItems) {
+    if (item.matchesFilter(typeSelect.value, genreSelect.value)) {
+      validItems.push(item);
+    }
+  }
+
   catalogContainer.innerHTML = "";
   catalogContainer.classList = "container";
+
+  if (validItems.length === 0) {
+    catalogContainer.classList = "py-5 text-center";
+    const heading = document.createElement("h3");
+    heading.textContent = "No matching items";
+
+    const p = document.createElement("p");
+    p.textContent = "Try adjusting your filter, or sort.";
+
+    catalogContainer.append(heading, p);
+  }
 
   const containerRow = document.createElement("div");
   containerRow.classList = "row row-cols-1 row-cols-lg-2 row-cols-xl-3";
   catalogContainer.append(containerRow);
 
-  for (const item of catalogItems) {
+  for (const item of validItems) {
     const containerCol = document.createElement("div");
     containerCol.classList = "col";
 
@@ -60,13 +78,13 @@ const onFileChange = (event) => {
         const rating = parseFloat(line[5]);
 
         return new CatalogItem(
-          line[0],
-          line[1],
-          line[2],
+          line[0].trim(),
+          line[1].trim(),
+          line[2].trim(),
           year,
-          line[4],
+          line[4].trim(),
           rating,
-          line[6],
+          line[6].trim(),
         );
       });
 
@@ -79,9 +97,5 @@ const onFileChange = (event) => {
     console.log("No file found.");
   }
 };
-
-const onTypeChange = (event) => {};
-
-const onGenreChange = (event) => {};
 
 const onSortChange = (event) => {};

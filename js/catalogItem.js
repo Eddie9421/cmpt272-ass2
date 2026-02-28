@@ -14,7 +14,8 @@ class CatalogItem {
 
   matchesFilter = function (type, genre) {
     return (
-      matchesProprety(this.type, type) && matchesProprety(this.genre, genre)
+      this.matchesProprety(this.type, type) &&
+      this.matchesProprety(this.genre, genre)
     );
   };
 
@@ -28,7 +29,7 @@ class CatalogItem {
 
   toCard = function () {
     const card = document.createElement("figure");
-    card.classList = "card shadow-lg";
+    card.classList = "card shadow-lg border-black";
 
     const title = document.createElement("h3");
     title.classList = "card-header";
@@ -46,7 +47,6 @@ class CatalogItem {
     this.addCardInformation(cardBody, `Type: ${this.type}`);
     this.addCardInformation(cardBody, `Genre: ${this.genre}`);
     this.addCardInformation(cardBody, `Rating: ${this.rating} ⭐`);
-
     const type = document.createElement("p");
     return card;
   };
