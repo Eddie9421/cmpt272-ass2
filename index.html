@@ -16,7 +16,9 @@
       defer
     ></script>
     <link rel="stylesheet" href="./css/styles.css" />
+    <script type="text/javascript" src="./js/eventHandlers.js" defer></script>
     <script type="text/javascript" src="./js/script.js" defer></script>
+    <script type="text/javascript" src="./js/catalogItem.js" defer></script>
     <link rel="icon" href="./assets/multimedia.png" />
     <title>Catalog Viewer</title>
   </head>
@@ -54,10 +56,12 @@
                 <label for="type" class="form-label">Type</label>
                 <select name="item-type" id="type" class="form-select">
                   <option value="all">All</option>
-                  <option value="book">Book</option>
-                  <option value="movie">Movie</option>
-                  <option value="game">Game</option>
-                  <option value="paper">Paper</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="genre" class="form-label">Genre</label>
+                <select name="item-genre" id="genre" class="form-select">
+                  <option value="all">All</option>
                 </select>
               </div>
               <div class="col">
@@ -88,9 +92,9 @@
       <section>
         <div class="align-items-center d-flex justify-content-between mb-4">
           <h2>Your Catalog</h2>
-          <p class="mb-0"><strong>0 items</strong></p>
+          <p class="mb-0"><strong id="catalog-items-count">0 items</strong></p>
         </div>
-        <div class="py-5 text-center">
+        <div class="py-5 text-center" id="catalog-container">
           <h3>No matching items</h3>
           <p>Try adjusting your filter, or sort.</p>
         </div>
