@@ -28,3 +28,10 @@ main > .card {
 main #catalog-container figure {
   height: stretch;
 }
+
+#catalog-container figure p,
+#catalog-container figure h3 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

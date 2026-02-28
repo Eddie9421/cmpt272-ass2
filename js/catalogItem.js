@@ -19,10 +19,15 @@ class CatalogItem {
     );
   };
 
-  addCardInformation = (cardBody, info) => {
+  addCardInformation = (cardBody, tag, info) => {
     const infoParagraph = document.createElement("p");
     infoParagraph.classList = "list-group-item";
-    infoParagraph.textContent = info;
+
+    const tagText = document.createElement("span");
+    tagText.classList = "fw-semibold";
+    tagText.textContent = `${tag}: `;
+
+    infoParagraph.append(tagText, info);
 
     cardBody.append(infoParagraph);
   };
@@ -42,12 +47,12 @@ class CatalogItem {
 
     card.append(cardBody);
 
-    this.addCardInformation(cardBody, `Author: ${this.author}`);
-    this.addCardInformation(cardBody, `Year: ${this.year}`);
-    this.addCardInformation(cardBody, `Type: ${this.type}`);
-    this.addCardInformation(cardBody, `Genre: ${this.genre}`);
-    this.addCardInformation(cardBody, `Rating: ${this.rating} ⭐`);
-    const type = document.createElement("p");
+    this.addCardInformation(cardBody, "Author", this.author);
+    this.addCardInformation(cardBody, "Year", this.year);
+    this.addCardInformation(cardBody, "Type", this.type);
+    this.addCardInformation(cardBody, "Genre", this.genre);
+    this.addCardInformation(cardBody, "Rating", `${this.rating} ⭐`);
+
     return card;
   };
 }
