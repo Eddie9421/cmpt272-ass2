@@ -7,3 +7,6 @@ const catalogContainer = document.getElementById("catalog-container");
 let catalogItems = [];
 
 fileInput.addEventListener("change", onFileChange);
+typeSelect.addEventListener("change", onTypeChange);
+genreSelect.addEventListener("change", onGenreChange);
+sortSelect.addEventListener("change", onSortChange);

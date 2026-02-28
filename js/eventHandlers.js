@@ -1,24 +1,8 @@
 const hasOption = (selectId, option) =>
   document.querySelector(`#${selectId} option[value="${option}"]`);
 
-// classList of no items found message = py-5 text-center
-const updateCatalogUi = () => {
-  catalogContainer.innerHTML = "";
-  catalogContainer.classList = "container";
-  const containerRow = document.createElement("div");
-  containerRow.classList = "row";
-  catalogContainer.append(containerRow);
-
-  const containerCol = document.createElement("div");
-  containerCol.classList = "col";
-  containerRow.append(containerCol);
-
-  const itemCountText = document.getElementById("catalog-items-count");
-  itemCountText.textContent = `${catalogItems.length} items`;
-
+const addFilterOptions = () => {
   for (const item of catalogItems) {
-    containerCol.append(item.toCard());
-
     const itemType = item.type.trim();
     const itemGenre = item.genre.trim();
 
@@ -38,6 +22,27 @@ const updateCatalogUi = () => {
       genreSelect.options.add(genreOption);
     }
   }
+};
+
+// classList of no items found message = py-5 text-center
+const updateCatalogUi = () => {
+  catalogContainer.innerHTML = "";
+  catalogContainer.classList = "container";
+
+  const containerRow = document.createElement("div");
+  containerRow.classList = "row row-cols-1 row-cols-lg-2 row-cols-xl-3";
+  catalogContainer.append(containerRow);
+
+  for (const item of catalogItems) {
+    const containerCol = document.createElement("div");
+    containerCol.classList = "col";
+
+    containerRow.append(containerCol);
+    containerCol.append(item.toCard());
+  }
+
+  const itemCountText = document.getElementById("catalog-items-count");
+  itemCountText.textContent = `${catalogItems.length} items`;
 };
 
 const onFileChange = (event) => {
@@ -65,10 +70,18 @@ const onFileChange = (event) => {
         );
       });
 
+      addFilterOptions();
       updateCatalogUi();
     });
 
     reader.readAsText(file);
   } else {
+    console.log("No file found.");
   }
 };
+
+const onTypeChange = (event) => {};
+
+const onGenreChange = (event) => {};
+
+const onSortChange = (event) => {};

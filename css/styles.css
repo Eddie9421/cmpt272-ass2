@@ -24,3 +24,7 @@ main > .card {
   background-size: cover;
   text-shadow: 0.1em 0.1em 0.3em black;
 }
+
+main #catalog-container figure {
+  height: stretch;
+}

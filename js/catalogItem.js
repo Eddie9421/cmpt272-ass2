@@ -28,7 +28,7 @@ class CatalogItem {
 
   toCard = function () {
     const card = document.createElement("figure");
-    card.classList = "card";
+    card.classList = "card shadow-lg";
 
     const title = document.createElement("h3");
     title.classList = "card-header";
