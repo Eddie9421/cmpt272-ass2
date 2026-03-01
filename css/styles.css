@@ -26,7 +26,15 @@ main > .card {
 }
 
 main #catalog-container figure {
+  cursor: pointer;
+  position: relative;
   height: stretch;
+  top: 0;
+  transition: top 0.1s ease-in;
+}
+
+main #catalog-container figure:hover {
+  top: -0.3em;
 }
 
 #catalog-container figure p,

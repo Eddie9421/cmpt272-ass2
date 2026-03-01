@@ -76,6 +76,13 @@ const onFileChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!file.name.endsWith(".csv")) {
+      statusMessage.textContent = "Please upload only CSV files.";
+      statusMessage.classList =
+        "alert alert-danger border-2 border-black fs-5 text-black";
+      return;
+    }
+
     const reader = new FileReader();
     reader.addEventListener("load", (event) => {
       try {
@@ -84,9 +91,14 @@ const onFileChange = (event) => {
         lines = lines.map((line) => line.split(","));
 
         let index = 0;
+
         catalogItems = lines.map((line) => {
           const year = parseInt(line[3]);
           const rating = parseFloat(line[5]);
+
+          if (Number.isNaN(year) || Number.isNaN(rating)) {
+            throw new Error(`NaN error, year = ${year}, rating = ${rating}`);
+          }
 
           return new CatalogItem(
             line[0].trim(),
@@ -103,9 +115,16 @@ const onFileChange = (event) => {
         addFilterOptions();
         updateCatalogUi();
 
+        sortSelect.value = "none";
+        statusMessage.classList =
+          "alert alert-success border-2 border-black fs-5 text-black";
         statusMessage.textContent = `Loaded ${catalogItems.length} item(s).`;
       } catch (error) {
         console.error(error);
+        statusMessage.textContent =
+          "Unable to parse CSV file, please check that it's correct.";
+        statusMessage.classList =
+          "alert alert-danger border-2 border-black fs-5 text-black";
       }
     });
 
@@ -120,7 +139,7 @@ const onSortChange = (event) => {
 
   switch (sortOption) {
     case "none":
-      catalogItems.sort((a, b) => a.index - b.index);
+      catalogItems.sort((a, b) => a.originalIndex - b.originalIndex);
       break;
     case "year-ascending":
       catalogItems.sort((a, b) => a.year - b.year);

@@ -1,5 +1,14 @@
 class CatalogItem {
-  constructor(title, type, author, year, genre, rating, description, index) {
+  constructor(
+    title,
+    type,
+    author,
+    year,
+    genre,
+    rating,
+    description,
+    originalIndex,
+  ) {
     this.title = title;
     this.type = type;
     this.author = author;
@@ -7,11 +16,14 @@ class CatalogItem {
     this.genre = genre;
     this.rating = rating;
     this.description = description;
-    this.index = index;
+    this.originalIndex = originalIndex;
   }
 
-  matchesProprety = (currentProprety, expectedProprety) =>
-    expectedProprety === "all" ? true : currentProprety === expectedProprety;
+  matchesProprety = function (currentProprety, expectedProprety) {
+    return expectedProprety === "all"
+      ? true
+      : currentProprety === expectedProprety;
+  };
 
   matchesFilter = function (type, genre) {
     return (
@@ -20,7 +32,7 @@ class CatalogItem {
     );
   };
 
-  addCardInformation = (cardBody, tag, info) => {
+  addCardInformation = function (cardBody, tag, info) {
     const infoParagraph = document.createElement("p");
     infoParagraph.classList = "list-group-item";
 
@@ -53,6 +65,25 @@ class CatalogItem {
     this.addCardInformation(cardBody, "Type", this.type);
     this.addCardInformation(cardBody, "Genre", this.genre);
     this.addCardInformation(cardBody, "Rating", `${this.rating} ⭐`);
+
+    const modal = new bootstrap.Modal("#item-modal");
+
+    document
+      .getElementById("item-header-close-button")
+      .addEventListener("click", () => {
+        modal.hide();
+      });
+    document
+      .getElementById("item-footer-close-button")
+      .addEventListener("click", () => {
+        modal.hide();
+      });
+
+    card.addEventListener("click", () => {
+      document.getElementById("item-title").textContent = this.title;
+      document.getElementById("item-details").textContent = this.description;
+      modal.show();
+    });
 
     return card;
   };
